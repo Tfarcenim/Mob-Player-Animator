@@ -1,0 +1,84 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    version = neoforge_version
+    // Automatically enable neoforge AccessTransformers if the file exists
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers.from(at.absolutePath)
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
+            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+        }
+        client {
+            client()
+        }
+        client2 {
+            client()
+            programArguments.addAll '--username', 'Dev1'
+            gameDirectory = project.file('run2')
+        }
+        data {
+            data()
+            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+            // workingDirectory project.file('run-data')
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', project.mod_id, '--all',
+                    '--output', rootProject.project(":common").file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', rootProject.project(":common").file('src/main/resources/').getAbsolutePath()
+        }
+        server {
+            server()
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    //annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+
+    implementation("dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim_version}")
+    implementation("me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}")
+
+    //runtimeOnly fg.deobf("lib:bettermobcombat-forge:${project.better_mob_combat_version}-all")
+
+    // Better Mob Combat Dependencies
+    runtimeOnly("maven.modrinth:better-combat:${project.better_combat_version}-neoforge")
+    runtimeOnly("me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}")
+
+    // Mod Compatibility
+    /*implementation fg.deobf("maven.modrinth:guard-villagers:${project.guard_villagers_version}")
+    implementation fg.deobf("maven.modrinth:entity-model-features:${project.emf_version}-forge")
+    implementation fg.deobf("maven.modrinth:entitytexturefeatures:${project.etf_version}-forge")
+    runtimeOnly fg.deobf("curse.maven:all-bark-all-bite-833755:4817227")
+    runtimeOnly fg.deobf("maven.modrinth:serious-player-animations:${project.spa_version}-forge")
+    runtimeOnly fg.deobf("maven.modrinth:not-enough-animations:${project.nea_version}")
+    runtimeOnly fg.deobf("maven.modrinth:minecraft-comes-alive-reborn:${mcar_version}")
+    runtimeOnly fg.deobf("maven.modrinth:architectury-api:${architectury_version}+forge")
+    runtimeOnly fg.deobf("maven.modrinth:bendy-lib:${bendylib_version}-forge")
+    runtimeOnly(fg.deobf("maven.modrinth:simply-swords:${simply_swords_version}-forge"))
+    runtimeOnly fg.deobf("maven.modrinth:villager-recruits:${recruits_version}")
+    implementation fg.deobf("maven.modrinth:customnpcs-unofficial:${custom_npcs_version}")
+    runtimeOnly fg.deobf("curse.maven:human-companions-570319:5992891")
+    runtimeOnly fg.deobf("maven.modrinth:vampirism:${vampirism_version}")
+    implementation fg.deobf("curse.maven:modulargolems-690937:6058893")
+    // Modular Golems dependency
+        runtimeOnly fg.deobf("curse.maven:l2library-620203:5921890")*/
+}
+sourceSets.main.resources { srcDir 'src/generated/resources' }
