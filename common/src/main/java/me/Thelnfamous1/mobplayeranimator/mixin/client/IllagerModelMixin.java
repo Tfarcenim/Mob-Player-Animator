@@ -76,8 +76,8 @@ public abstract class IllagerModelMixin<T extends AbstractIllager> extends Hiera
     }
 
     @Override
-    protected boolean mobplayeranimator$bendRenderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        return PlayerAnimatorHelper.bendRenderToBuffer(matrices, vertices, light, overlay, red, green, blue, alpha, this.mobplayeranimator$animation, this.mobplayeranimator$headParts(), this.mobplayeranimator$bodyParts());
+    protected boolean mobplayeranimator$bendRenderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+        return PlayerAnimatorHelper.bendRenderToBuffer(matrices, vertices, light, overlay, color, this.mobplayeranimator$animation, this.mobplayeranimator$headParts(), this.mobplayeranimator$bodyParts());
     }
 
     @Unique

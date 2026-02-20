@@ -19,16 +19,15 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 
     implementation("dev.kosmx.player-anim:player-animation-lib-forge:${project.player_anim_version}")
-    implementation("me.shedaniel.cloth:cloth-config:${project.cloth_config_version}") {transitive false}
+    compileOnly("me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}") {transitive false}//using common causes complaints
 
     // Better Mob Combat Dependencies
     implementation("maven.modrinth:better-combat:${project.better_combat_version}-neoforge")
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${project.mixin_extras_version}"))
 
 
     // Mod Compatibility
-    implementation("maven.modrinth:entity-model-features:${project.emf_version}")
-    implementation("maven.modrinth:entitytexturefeatures:${project.etf_version}-forge")
+    compileOnly("maven.modrinth:entity-model-features:${project.emf_version}-neoforge-1.21")
+    compileOnly("maven.modrinth:entitytexturefeatures:${project.etf_version}-neoforge-1.21")
     implementation("maven.modrinth:minecraft-comes-alive-reborn:${project.mcar_version}")
 
 }

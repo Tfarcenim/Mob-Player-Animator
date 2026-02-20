@@ -6,6 +6,7 @@ import com.google.gson.JsonPrimitive;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
+import dev.kosmx.playerAnim.api.IPlayable;
 import dev.kosmx.playerAnim.api.layered.*;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import dev.kosmx.playerAnim.impl.IAnimatedPlayer;
@@ -41,7 +42,7 @@ public class ClientConfigHelper {
                 if(log) Constants.LOG.error("Could not parse {} entry key {}, not a valid namespaced id", "emf_model_modifiers", key);
                 return;
             }
-            MPAModelModifier modelModifier = MPAModelModifier.CODEC.parse(JsonOps.INSTANCE, new Gson().fromJson(value, JsonObject.class)).getOrThrow(false, Constants.LOG::error);
+            MPAModelModifier modelModifier = MPAModelModifier.CODEC.parse(JsonOps.INSTANCE, new Gson().fromJson(value, JsonObject.class)).getOrThrow();
             if(modelModifier == null){
                 if(log) Constants.LOG.error("Could not parse {} entry value {} mapped to {}, not a valid model modifier", "emf_model_modifiers", key, value);
                 return;
@@ -117,7 +118,7 @@ public class ClientConfigHelper {
             if(blacklistedAnimationIds.isEmpty()) return true;
 
             for (ResourceLocation id : blacklistedAnimationIds) {
-                KeyframeAnimation blacklistedAnimation = PlayerAnimationRegistry.getAnimation(id);
+                @Nullable IPlayable blacklistedAnimation = PlayerAnimationRegistry.getAnimation(id);
                 if (!keyframeAnimationPlayer.getData().equals(blacklistedAnimation)) {
                     return true;
                 }

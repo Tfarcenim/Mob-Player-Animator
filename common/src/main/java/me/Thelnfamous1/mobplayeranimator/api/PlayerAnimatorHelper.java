@@ -115,31 +115,28 @@ public class PlayerAnimatorHelper {
     }
 
     /**
-     * Called at the beginning of {@link net.minecraft.client.model.HierarchicalModel#renderToBuffer(PoseStack, VertexConsumer, int, int, float, float, float, float)}
+     * Called at the beginning of {@link net.minecraft.client.model.HierarchicalModel#renderToBuffer(PoseStack, VertexConsumer, int, int, int)}
      * @param matrices
      * @param vertices
      * @param light
      * @param overlay
-     * @param red
-     * @param green
-     * @param blue
-     * @param alpha
+     * @param color
      * @param animation The animation to apply to the model parts
      * @param headParts The parts of the head, vanilla does not include hats here
      * @param bodyParts The parts of the body, vanilla includes hats here
      * @return If the custom renderToBuffer logic was handled
      */
-    public static boolean bendRenderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha, SetableSupplier<AnimationProcessor> animation, Iterable<ModelPart> headParts, Iterable<ModelPart> bodyParts) {
+    public static boolean bendRenderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, int color , SetableSupplier<AnimationProcessor> animation, Iterable<ModelPart> headParts, Iterable<ModelPart> bodyParts) {
         // copied from PlayerAnimator's BipedEntityModelMixin#renderToBuffer
         if(Helper.isBendEnabled() && animation.get() != null && animation.get().isActive()){
             headParts.forEach((part)->{
                 if(! ((IUpperPartHelper)(Object)part).isUpperPart()){
-                    part.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+                    part.render(matrices, vertices, light, overlay, color);
                 }
             });
             bodyParts.forEach((part)->{
                 if(! ((IUpperPartHelper)(Object)part).isUpperPart()){
-                    part.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+                    part.render(matrices, vertices, light, overlay, color);
                 }
             });
 
@@ -148,12 +145,12 @@ public class PlayerAnimatorHelper {
             IBendHelper.rotateMatrixStack(matrices, emoteSupplier.get().getBend("body"));
             headParts.forEach((part)->{
                 if(((IUpperPartHelper)(Object)part).isUpperPart()){
-                    part.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+                    part.render(matrices, vertices, light, overlay, color);
                 }
             });
             bodyParts.forEach((part)->{
                 if(((IUpperPartHelper)(Object)part).isUpperPart()){
-                    part.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+                    part.render(matrices, vertices, light, overlay, color);
                 }
             });
             matrices.popPose();

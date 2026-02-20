@@ -2,13 +2,13 @@ package me.Thelnfamous1.mobplayeranimator;
 
 import me.Thelnfamous1.mobplayeranimator.config.MPAClientConfigWrapper;
 import me.shedaniel.autoconfig.AutoConfig;
-import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 @Mod(Constants.MOD_ID)
 public class MobPlayerAnimatorForge {
     
@@ -21,9 +21,9 @@ public class MobPlayerAnimatorForge {
         // Use Forge to bootstrap the Common mod.
         MobPlayerAnimator.init();
 
-        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+        /*ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
                 () -> new ConfigScreenHandler.ConfigScreenFactory(
-                        (minecraft, screen) -> AutoConfig.getConfigScreen(MPAClientConfigWrapper.class, screen).get()));
+                        (minecraft, screen) -> AutoConfig.getConfigScreen(MPAClientConfigWrapper.class, screen).get()));*/
     }
 
     @SubscribeEvent

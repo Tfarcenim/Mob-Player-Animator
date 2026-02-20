@@ -6,14 +6,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import tallestegg.guardvillagers.client.models.GuardModel;
-import tallestegg.guardvillagers.entities.Guard;
+import tallestegg.guardvillagers.common.entities.Guard;
 
 @Pseudo
 @Mixin(value = GuardModel.class, remap = false)
 public abstract class GuardModelMixin {
 
     @WrapWithCondition(method = "setupAnim", remap = false,
-            at = @At(value = "INVOKE", target = "Ltallestegg/guardvillagers/client/models/GuardModel;holdWeaponHigh(Ltallestegg/guardvillagers/entities/Guard;)V", remap = false)
+            at = @At(value = "INVOKE", target = "Ltallestegg/guardvillagers/client/models/GuardModel;holdWeaponHigh(Ltallestegg/guardvillagers/common/entities/Guard;)V", remap = false)
     )
     private boolean onlyAnimateWeaponHighIfAllowed(GuardModel model, Guard guard) {
         return !PlayerAnimatorHelper.isAnimating(guard);

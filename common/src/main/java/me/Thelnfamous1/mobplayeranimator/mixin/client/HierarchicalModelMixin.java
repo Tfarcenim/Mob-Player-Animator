@@ -22,14 +22,14 @@ public abstract class HierarchicalModelMixin<E extends Entity> extends EntityMod
     }
 
     @Inject(method = "renderToBuffer", at = @At("HEAD"), cancellable = true)
-    private void pre_renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha, CallbackInfo ci){
-        if(this.mobplayeranimator$bendRenderToBuffer(matrices, vertices, light, overlay, red, green, blue, alpha)){
+    private void pre_renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color, CallbackInfo ci){
+        if(this.mobplayeranimator$bendRenderToBuffer(poseStack, buffer, packedLight, packedOverlay, color)){
             ci.cancel();
         }
     }
 
     @Unique
-    protected boolean mobplayeranimator$bendRenderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+    protected boolean mobplayeranimator$bendRenderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay,int red) {
         return false;
     }
 }
