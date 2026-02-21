@@ -10,7 +10,7 @@ base {
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(java_version)
     withSourcesJar()
-    withJavadocJar()
+    //withJavadocJar()
 }
 
 repositories {
@@ -62,7 +62,7 @@ repositories {
 
 // Declare capabilities on the outgoing configurations.
 // Read more about capabilities here: https://docs.gradle.org/current/userguide/component_capabilities.html#sec:declaring-additional-capabilities-for-a-local-component
-['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->
+['apiElements', 'runtimeElements', 'sourcesElements'/*, 'javadocElements'*/].each { variant ->
     configurations."$variant".outgoing {
         capability("$group:${base.archivesName.get()}:$version")
         capability("$group:$mod_id-${project.name}-${minecraft_version}:$version")
@@ -117,7 +117,10 @@ processResources {
             'player_anim_version_range' : player_anim_version_range,
             'cloth_config_version_range' : cloth_config_version_range,
             'guard_villagers_version_range' : guard_villagers_version_range,
-            'emf_version_range' : emf_version_range
+            'emf_version_range' : emf_version_range,
+            'player_anim_version_min':player_anim_version_min,
+            'cloth_config_version_min':cloth_config_version_min,
+            'emf_version_min':emf_version_min
     ]
 
     filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
