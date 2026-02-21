@@ -73,6 +73,10 @@ repositories {
     }
 }
 
+javadoc {
+    options.tags = [ "implNote","apiNote" ]
+}
+
 sourcesJar {
     from(rootProject.file('LICENSE')) {
         rename { "${it}_${mod_name}" }

@@ -62,7 +62,7 @@ public class PlayerAnimatorHelper {
     }
 
     /**
-     * Called at the end of {@link net.minecraft.client.renderer.entity.LivingEntityRenderer#setupRotations(LivingEntity, PoseStack, float, float, float)}
+     * Called at the end of {@link net.minecraft.client.renderer.entity.LivingEntityRenderer#setupRotations(LivingEntity, PoseStack, float, float, float, float)}
      *
      * @param animation The animation to be applied to the model being rotated by the renderer
      * @param matrixStack The PoseStack of the model being rotated by the renderer

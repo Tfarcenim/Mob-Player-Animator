@@ -59,7 +59,7 @@ dependencies {
     //runtimeOnly fg.deobf("lib:bettermobcombat-forge:${project.better_mob_combat_version}-all")
 
     // Better Mob Combat Dependencies
-    runtimeOnly("maven.modrinth:better-combat:${project.better_combat_version}-neoforge")
+    //runtimeOnly("maven.modrinth:better-combat:${project.better_combat_version}-neoforge")
     runtimeOnly("me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}")
 
     // Mod Compatibility
