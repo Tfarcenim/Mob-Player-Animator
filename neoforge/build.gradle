@@ -63,7 +63,7 @@ dependencies {
     runtimeOnly("me.shedaniel.cloth:cloth-config-neoforge:${project.cloth_config_version}")
 
     // Mod Compatibility
-    implementation ("maven.modrinth:guard-villagers:${project.guard_villagers_version}")
+    compileOnly ("maven.modrinth:guard-villagers:${project.guard_villagers_version}")
     implementation ("maven.modrinth:customnpcs-unofficial:${custom_npcs_version}")
     implementation ("curse.maven:modulargolems-690937:7649242")
     implementation "curse.maven:l2library-620203:7584599"
