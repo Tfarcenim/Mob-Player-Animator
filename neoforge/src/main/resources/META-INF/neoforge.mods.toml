@@ -14,37 +14,37 @@ authors = "${mod_author}" #optional
 description = '''${description}''' #mandatory (Supports multiline text)
 [[dependencies.${mod_id}]] #optional
 modId = "neoforge" #mandatory
-mandatory = true #mandatory
+type="required" #mandatory (Can be one of "required", "optional", "incompatible" or "discouraged")
 versionRange = "[21,)" #mandatory
 ordering = "NONE" # The order that this dependency should load in relation to your mod, required to be either 'BEFORE' or 'AFTER' if the dependency is not mandatory
 side = "BOTH" # Side this dependency is applied on - 'BOTH', 'CLIENT' or 'SERVER'
 [[dependencies.${mod_id}]]
 modId = "minecraft"
-mandatory = true
+type="required" #mandatory (Can be one of "required", "optional", "incompatible" or "discouraged")
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.${mod_id}]]
 modId="playeranimator"
-mandatory=true
+type="required" #mandatory (Can be one of "required", "optional", "incompatible" or "discouraged")
 versionRange="${player_anim_version_range}"
 ordering="AFTER"
 side="BOTH"
 [[dependencies.${mod_id}]]
 modId="cloth_config"
-mandatory=true
+type="required" #mandatory (Can be one of "required", "optional", "incompatible" or "discouraged")
 versionRange="${cloth_config_version_range}"
 ordering="AFTER"
 side="BOTH"
 [[dependencies.${mod_id}]]
 modId = "guardvillagers"
-mandatory = false
+type="optional" #mandatory (Can be one of "required", "optional", "incompatible" or "discouraged")
 versionRange = "${guard_villagers_version_range}"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.${mod_id}]]
 modId = "entity_model_features"
-mandatory = false
+type="optional" #mandatory (Can be one of "required", "optional", "incompatible" or "discouraged")
 versionRange = "${emf_version_range}"
 ordering = "NONE"
 side = "CLIENT"
