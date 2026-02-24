@@ -35,9 +35,9 @@ public abstract class LivingEntityRendererMixin<
     }
 
     @Inject(method = "setupRotations", at = @At("RETURN"))
-    private void post_setupRotations(T entity, PoseStack matrixStack, float $$2, float $$3, float tickDelta, CallbackInfo ci){
+    private void post_setupRotations(T entity, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float scale, CallbackInfo ci){
         if(entity instanceof Mob mob){
-            this.mobplayeranimator$applyBodyRotations(mob, matrixStack, tickDelta);
+            this.mobplayeranimator$applyBodyRotations(mob, poseStack, partialTick);
         }
     }
 
@@ -47,7 +47,7 @@ public abstract class LivingEntityRendererMixin<
     }
 
     @Inject(method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V", shift = At.Shift.BEFORE))
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;III)V", shift = At.Shift.BEFORE))
 
     protected void pre_renderToBuffer(T $$0, float $$1, float $$2, PoseStack $$3, MultiBufferSource $$4, int $$5, CallbackInfo ci) {
         if(MobPlayerAnimatorClient.isEMFLoaded()){
@@ -56,7 +56,7 @@ public abstract class LivingEntityRendererMixin<
     }
 
     @Inject(method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIFFFF)V", shift = At.Shift.AFTER))
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;renderToBuffer(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;III)V", shift = At.Shift.AFTER))
 
     protected void post_renderToBuffer(T $$0, float $$1, float $$2, PoseStack $$3, MultiBufferSource $$4, int $$5, CallbackInfo ci) {
         if(MobPlayerAnimatorClient.isEMFLoaded()){

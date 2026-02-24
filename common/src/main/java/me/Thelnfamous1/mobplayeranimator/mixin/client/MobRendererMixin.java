@@ -19,9 +19,14 @@ public abstract class MobRendererMixin<T extends Mob, M extends EntityModel<T>> 
         super($$0);
     }
 
-    @Inject(method = "render(Lnet/minecraft/world/entity/Mob;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"))
+    /*@Inject(method = "render(Lnet/minecraft/world/entity/Mob;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"))
     private void pre_render(T mob, float $$1, float $$2, PoseStack $$3, MultiBufferSource $$4, int $$5, CallbackInfo ci){
-        this.mobplayeranimator$handleFirstPersonRender(mob);
+    }*/
+
+    @Override
+    public void render(T p_entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        this.mobplayeranimator$handleFirstPersonRender(p_entity);
+        super.render(p_entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
     @Unique
